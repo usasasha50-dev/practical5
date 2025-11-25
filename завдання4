@@ -1,0 +1,31 @@
+#include <iostream>
+#include <iomanip>
+
+void task4() {
+    std::cout << "\n--- Завдання 4: Середнє значення геометричної прогресії ---" << std::endl;
+    const int N = 6; // Кількість членів
+    double b1 = 3.0; // Перший член
+    double q = 2.0;  // Знаменник
+    double arr[N];
+    double sum = 0.0;
+
+    // Заповнення масиву та обчислення суми
+    std::cout << "Члени геометричної прогресії: ";
+    arr[0] = b1;
+    sum += arr[0];
+    std::cout << arr[0] << " ";
+    
+    for (int i = 1; i < N; ++i) {
+        arr[i] = arr[i - 1] * q; // b_n = b_{n-1} * q
+        sum += arr[i];
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    // Обчислення середнього значення
+    double average = sum / N;
+
+    std::cout << "Сума елементів: " << sum << std::endl;
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Середнє значення масиву: " << average << std::endl;
+}

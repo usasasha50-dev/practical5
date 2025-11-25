@@ -1,0 +1,105 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+#include <cmath>
+
+// Допоміжна функція для виводу масиву
+void print_2d_array(int arr[][4], int rows, int cols) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::cout << std::setw(5) << arr[i][j];
+        }
+        std::cout << std::endl;
+    }
+}
+
+void tasks5_to_8() {
+    std::cout << "\n--- Завдання 5-8: Операції з двовимірним масивом ---" << std::endl;
+    const int ROWS = 3;
+    const int COLS = 4;
+    int arr[ROWS][COLS];
+    
+    // Ініціалізація та заповнення масиву випадковими числами [1; 20]
+    std::srand(std::time(0));
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
+            arr[i][j] = std::rand() % 20 + 1; 
+        }
+    }
+
+    std::cout << "Вихідний двовимірний масив (" << ROWS << "x" << COLS << "):" << std::endl;
+    print_2d_array(arr, ROWS, COLS);
+    
+    // --- Завдання 5: Сума та середнє значення ---
+    long long total_sum = 0;
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
+            total_sum += arr[i][j];
+        }
+    }
+    double average = (double)total_sum / (ROWS * COLS);
+    std::cout << "\nЗавдання 5:" << std::endl;
+    std::cout << "Загальна сума масиву: " << total_sum << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "Середнє значення масиву: " << average << std::endl;
+
+    // --- Завдання 6: Сума кожного стовпця та загальна сума ---
+    std::cout << "\nЗавдання 6: Сума стовпців:" << std::endl;
+    for (int j = 0; j < COLS; ++j) {
+        long long col_sum = 0;
+        for (int i = 0; i < ROWS; ++i) {
+            col_sum += arr[i][j];
+        }
+        std::cout << "Сума стовпця " << j + 1 << ": " << col_sum << std::endl;
+    }
+    std::cout << "Загальна сума (повторно): " << total_sum << std::endl;
+
+    // --- Завдання 7: Сума кожного рядка ---
+    std::cout << "\nЗавдання 7: Сума рядків:" << std::endl;
+    for (int i = 0; i < ROWS; ++i) {
+        long long row_sum = 0;
+        for (int j = 0; j < COLS; ++j) {
+            row_sum += arr[i][j];
+        }
+        std::cout << "Сума рядка " << i + 1 << ": " << row_sum << std::endl;
+    }
+    
+    // --- Завдання 8: Квадрат непарних та їхня кількість ---
+    int odd_count = 0;
+    std::cout << "\nЗавдання 8: Квадрат непарних елементів та їхня кількість:" << std::endl;
+    
+    // Створення копії масиву для модифікації
+    int modified_arr[ROWS][COLS];
+    for(int i = 0; i < ROWS; ++i) {
+        for(int j = 0; j < COLS; ++j) {
+            modified_arr[i][j] = arr[i][j];
+        }
+    }
+
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
+            if (modified_arr[i][j] % 2 != 0) { // Перевірка на непарність
+                odd_count++;
+                modified_arr[i][j] = std::pow(modified_arr[i][j], 2); // Піднесення до квадрату
+            }
+        }
+    }
+    
+    std::cout << "Кількість непарних елементів: " << odd_count << std::endl;
+    std::cout << "Масив після піднесення непарних елементів до квадрату:" << std::endl;
+    print_2d_array(modified_arr, ROWS, COLS);
+}
+
+// Головна функція для запуску всіх завдань
+int main() {
+    task1();
+    std::cout << "\n======================================================\n";
+    task2();
+    std::cout << "\n======================================================\n";
+    task3();
+    std::cout << "\n======================================================\n";
+    task4();
+    std::cout << "\n======================================================\n";
+    tasks5_to_8();
+    return 0;
+}

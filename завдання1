@@ -1,0 +1,25 @@
+#include <iostream>
+
+void task1() {
+    std::cout << "--- Завдання 1: Сума двозначних чисел ---" << std::endl;
+    const int SIZE = 5; // Розмір масиву для прикладу
+    int arr[SIZE];
+    long long sum_two_digit = 0; // Використовуємо long long на випадок великої суми
+
+    // Введення елементів масиву з клавіатури
+    std::cout << "Введіть " << SIZE << " цілих чисел:" << std::endl;
+    for (int i = 0; i < SIZE; ++i) {
+        std::cout << "Елемент [" << i << "]: ";
+        std::cin >> arr[i];
+    }
+
+    // Обчислення суми двозначних чисел
+    for (int i = 0; i < SIZE; ++i) {
+        // Перевірка на двозначне число: -99 <= arr[i] <= -10 АБО 10 <= arr[i] <= 99
+        if ((arr[i] >= 10 && arr[i] <= 99) || (arr[i] <= -10 && arr[i] >= -99)) {
+            sum_two_digit += arr[i];
+        }
+    }
+
+    std::cout << "Сума всіх двозначних чисел у масиві: " << sum_two_digit << std::endl;
+}

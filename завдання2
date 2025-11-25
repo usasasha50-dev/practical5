@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+void task2() {
+    std::cout << "\n--- Завдання 2: Добуток, кількість та Selection Sort ---" << std::endl;
+    const int SIZE = 10;
+    int arr[SIZE];
+    long long product_positive = 1;
+    int count_positive = 0;
+
+    // Ініціалізація генератора випадкових чисел
+    std::srand(std::time(0)); 
+
+    // Заповнення масиву випадковими числами [-50; 50]
+    std::cout << "Вихідний масив: ";
+    for (int i = 0; i < SIZE; ++i) {
+        arr[i] = std::rand() % 101 - 50; // Діапазон [0; 100] - 50 -> [-50; 50]
+        std::cout << arr[i] << " ";
+
+        // Обчислення добутку та кількості додатніх елементів
+        if (arr[i] > 0) {
+            product_positive *= arr[i];
+            count_positive++;
+        }
+    }
+    std::cout << std::endl;
+
+    std::cout << "Кількість додатніх елементів: " << count_positive << std::endl;
+    std::cout << "Добуток додатніх елементів: " << (count_positive > 0 ? std::to_string(product_positive) : "0 (або 1, якщо немає додатніх)") << std::endl;
+
+    // Сортування методом екстремальних елементів (Selection Sort)
+    for (int i = 0; i < SIZE - 1; ++i) {
+        int min_idx = i;
+        for (int j = i + 1; j < SIZE; ++j) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        // Обмін мінімального елемента з поточним
+        if (min_idx != i) {
+            std::swap(arr[i], arr[min_idx]);
+        }
+    }
+
+    std::cout << "Масив після сортування (Selection Sort): ";
+    for (int i = 0; i < SIZE; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
